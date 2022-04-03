@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Posts} from "./components/Posts";
 
 export default class App2 extends Component {
     state = {
@@ -9,12 +10,19 @@ export default class App2 extends Component {
         ]
     };
 
+    handleSomething = () => {
+        console.log('это я')
+    }
+    removePost = (e) => {
+            this.setState({posts: this.state.posts.filter(post => post.id !== e)})
+    }
+
     render() {
+        const {posts} = this.state
+
         return(
             <div className="App2">
-                {this.state.posts.map((post,index) => (
-                    <h2 key={index}>{post.name}</h2>
-                ))}
+               <Posts posts={posts} del={this.removePost}/>
             </div>
         )
     }
